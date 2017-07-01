@@ -13,7 +13,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { HeroSearchService } from './service/hero-search.service';
-import { Hero } from '../hero';
+import { Hero } from './../hero/model/hero';
 
 @Component({
   selector: 'app-hero-search',
@@ -22,20 +22,16 @@ import { Hero } from '../hero';
   providers: [HeroSearchService]
 })
 export class HeroSearchComponent implements OnInit {
-  
+
   heroes: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
 
   constructor(
     private heroSearchService: HeroSearchService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.heroes = this.searchTerms
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged()   // ignore if next search term is same as previous
@@ -50,9 +46,15 @@ export class HeroSearchComponent implements OnInit {
         return Observable.of<Hero[]>([]);
       });
   }
-  
+
+  // Push a search term into the observable stream.
+  search(term: string): void {
+    this.searchTerms.next(term);
+  }
+
   gotoDetail(hero: Hero): void {
-    let link = ['/detail', hero.id];
+    const link = ['/detail', hero.id];
     this.router.navigate(link);
   }
+
 }

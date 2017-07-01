@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class HeroPage {
+export class HahaPage {
   navigateTo() {
     return browser.get('/');
   }

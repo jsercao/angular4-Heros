@@ -1,10 +1,10 @@
-import { HeroPage } from './app.po';
+import { HahaPage } from './app.po';
 
-describe('hero App', () => {
-  let page: HeroPage;
+describe('haha App', () => {
+  let page: HahaPage;
 
   beforeEach(() => {
-    page = new HeroPage();
+    page = new HahaPage();
   });
 
   it('should display welcome message', () => {

@@ -1,11 +1,9 @@
-<h2>
-  My Heroes</h2>
+<h2>英雄列表</h2>
 
 <div>
-  <label>Hero name:</label> <input #heroName />
-  <button (click)="add(heroName.value); heroName.value=''">
-    Add
-  </button>
+  <label for="heroname">英雄名字:</label>
+  <input id="heroname" type="text" #heroName />
+  <button (click)="add(heroName.value); heroName.value=''">添加</button>
 </div>
 
 <ul class="heroes">
@@ -18,7 +16,7 @@
 
 <div *ngIf="selectedHero">
   <h2>
-    {{selectedHero.name | uppercase}} is my hero
+    {{selectedHero.name | uppercase}} 是我的英雄
   </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <button (click)="gotoDetail()">展示详情</button>
 </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
-import { Hero } from '../hero';
-import { HeroService } from "../hero.service";
+import { HeroService } from './../hero/hero-service/hero.service';
+import { Hero } from './../hero/model/hero';
 
 @Component({
   selector: 'app-heroes',
@@ -19,16 +19,16 @@ export class HeroesComponent implements OnInit {
     private heroService: HeroService
   ) { }
 
+  ngOnInit() {
+    this.getHeroes();
+  }
+
   getHeroes(): void {
     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
-  }
-
-  ngOnInit(): void {
-    this.getHeroes();
   }
 
   gotoDetail(): void {
@@ -46,11 +46,12 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(hero: Hero): void {
-    this.heroService
-      .delete(hero.id)
+    this.heroService.delete(hero.id)
       .then(() => {
         this.heroes = this.heroes.filter(h => h !== hero);
-        if (this.selectedHero === hero) { this.selectedHero = null; }
+        if (this.selectedHero === hero) {
+          this.selectedHero = null;
+        }
       });
   }
 
